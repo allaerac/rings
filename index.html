@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-visual">
+<meta name="theme-color" content="#0A0D16">
+<title>Rings · The money you send, made to last</title>
+<meta name="description" content="Rings turns the money you send into one simple number: what can be spent this week. Peace of mind for the whole family. Join the waitlist.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://allaerac.github.io/rings/">
+<meta property="og:title" content="Rings · The money you send, made to last">
+<meta property="og:description" content="Peace of mind for the whole family. Join the waitlist.">
+<meta property="og:image" content="https://allaerac.github.io/rings/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..600&display=swap">
+<style>
+  :root {
+    --violet: #6474FF; --mint: #3BCFBF; --pink: #FF9FBD;
+    --bg: #0A0D16; --bg-2: #151A28; --line: rgba(238, 241, 247, .09);
+    --ink: #EEF1F7; --soft: #8F97AA; --frost: rgba(255, 255, 255, .05);
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Geist", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    background: var(--bg); color: var(--ink); font-family: var(--body); -webkit-font-smoothing: antialiased;
+    font-size: clamp(16px, 1.1vw, 18px); line-height: 1.5;
+    min-height: 100dvh; display: grid; place-items: center; padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
+    position: relative; overflow-x: hidden;
+  }
+  /* the app's soft color glow, behind everything */
+  body::before {
+    content: ""; position: fixed; inset: -20%; z-index: -1; pointer-events: none; filter: blur(60px); opacity: .55;
+    background:
+      radial-gradient(closest-side at 30% 35%, color-mix(in srgb, var(--violet) 45%, transparent), transparent),
+      radial-gradient(closest-side at 72% 30%, color-mix(in srgb, var(--mint) 28%, transparent), transparent),
+      radial-gradient(closest-side at 55% 80%, color-mix(in srgb, var(--pink) 18%, transparent), transparent);
+  }
+  main { width: min(30em, 100%); display: grid; gap: 1.6em; }
+  .brand { display: flex; align-items: center; gap: .6em; font-family: var(--display); font-weight: 600; font-size: 1.3em; letter-spacing: -.02em; }
+  .brand svg { width: 1.5em; height: 1.5em; }
+  h1 { margin: 0; font-family: var(--display); font-weight: 500; font-size: clamp(2.3em, 8vw, 3.2em); line-height: 1.02; letter-spacing: -.035em; text-wrap: balance; }
+  .lead { margin: -.6em 0 0; color: var(--soft); font-size: 1.08em; text-wrap: pretty; }
+  .lead b { color: var(--ink); font-weight: 500; }
+
+  .card { background: var(--frost); border: 1px solid var(--line); border-radius: 1.4em; padding: 1.4em; display: grid; gap: 1em; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .card h2 { margin: 0; font-family: var(--display); font-weight: 500; font-size: 1.35em; letter-spacing: -.02em; }
+  fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: .5em; }
+  legend { padding: 0; margin-bottom: .5em; color: var(--soft); font-size: .92em; }
+  .roles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5em; }
+  .roles input { position: absolute; opacity: 0; pointer-events: none; }
+  .roles label { text-align: center; padding: .7em .4em; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-2); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+  .roles input:checked + label { background: var(--ink); color: var(--bg); border-color: var(--ink); font-weight: 500; }
+  .roles input:focus-visible + label { outline: 2px solid var(--violet); outline-offset: 2px; }
+  .email { width: 100%; font: inherit; font-size: max(16px, 1em); color: var(--ink); background: var(--bg-2); border: 1px solid var(--line); border-radius: 1em; padding: .85em 1em; outline: none; }
+  .email::placeholder { color: var(--soft); }
+  .email:focus { border-color: color-mix(in srgb, var(--violet) 60%, transparent); }
+  .cta { font: inherit; font-weight: 500; font-size: 1.02em; border: 0; border-radius: 999px; padding: .95em 1em; background: var(--ink); color: var(--bg); cursor: pointer; transition: transform .15s, opacity .2s; }
+  .cta:active { transform: scale(.98); }
+  .cta[disabled] { opacity: .55; cursor: default; }
+  .msg { margin: 0; font-size: .92em; color: #FFB86B; }
+  .msg:empty { display: none; }
+  .fine { margin: 0; color: var(--soft); font-size: .85em; }
+
+  .done { display: none; text-align: center; justify-items: center; }
+  .done .ring { width: 5em; height: 5em; }
+  .done p { margin: 0; color: var(--soft); }
+  .joined .form { display: none; }
+  .joined .done { display: grid; }
+
+  footer { color: var(--soft); font-size: .88em; text-align: center; }
+
+  /* the ring draws itself in, and closes when you join */
+  .arc { stroke-dasharray: 942.5; stroke-dashoffset: 942.5; animation: draw 1.4s cubic-bezier(.2, .8, .2, 1) .2s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 236; } }
+  .joined .done .arc { animation: close 1.2s cubic-bezier(.2, .8, .2, 1) forwards; }
+  @keyframes close { from { stroke-dashoffset: 236; } to { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) { .arc, .joined .done .arc { animation: none; stroke-dashoffset: 236; } .joined .done .arc { stroke-dashoffset: 0; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6474FF"/><stop offset=".55" stop-color="#3BCFBF"/><stop offset="1" stop-color="#FF9FBD"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<main id="page">
+  <div class="brand"><svg class="mark" viewBox="0 0 512 512" aria-hidden="true"><circle cx="256" cy="256" r="150" fill="none" stroke="rgba(238,241,247,.12)" stroke-width="64"/><circle class="arc" cx="256" cy="256" r="150" fill="none" stroke="url(#g)" stroke-width="64" stroke-linecap="round" transform="rotate(-90 256 256)"/></svg>Rings</div>
+
+  <h1>The money you send, made to last.</h1>
+  <p class="lead">Rings turns the money you send into one simple number: what can be spent this week. <b>Peace of mind for the whole family.</b></p>
+
+  <section class="card" aria-labelledby="joinTitle">
+    <form class="form" id="form" novalidate>
+      <div style="display:grid;gap:1em">
+        <h2 id="joinTitle">Join the waitlist</h2>
+        <fieldset>
+          <legend>I'm a</legend>
+          <div class="roles">
+            <input type="radio" name="role" id="r-parent" value="parent"><label for="r-parent">Parent</label>
+            <input type="radio" name="role" id="r-student" value="student"><label for="r-student">Student</label>
+            <input type="radio" name="role" id="r-other" value="other"><label for="r-other">Other</label>
+          </div>
+        </fieldset>
+        <input class="email" id="email" type="email" name="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="Your email" aria-label="Your email" maxlength="254" required>
+        <button class="cta" id="go" type="submit">Join the waitlist</button>
+        <p class="msg" id="msg" role="status" aria-live="polite"></p>
+        <p class="fine">We'll only email you about Rings.</p>
+      </div>
+    </form>
+    <div class="done" id="done" aria-live="polite">
+      <svg class="ring" viewBox="0 0 512 512" aria-hidden="true"><circle cx="256" cy="256" r="150" fill="none" stroke="rgba(238,241,247,.12)" stroke-width="64"/><circle class="arc" cx="256" cy="256" r="150" fill="none" stroke="url(#g)" stroke-width="64" stroke-linecap="round" transform="rotate(-90 256 256)"/></svg>
+      <h2 id="doneTitle">You're on the list.</h2>
+      <p>We'll email you when Rings is ready.</p>
+    </div>
+  </section>
+
+  <footer>Built by five Miami University students.</footer>
+</main>
+
+<script>
+  // Signups go to the "waitlist" table in Supabase. The public key can only add a row, never read one.
+  const URL_ = 'https://yzxyeribpbanmqhuowym.supabase.co/rest/v1/waitlist';
+  const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl6eHllcmlicGJhbm1xaHVvd3ltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0MTAwMDMsImV4cCI6MjEwNzk4NjAwM30.sQp4le65dA1B-6amO1MfVU5ubttLjhSL9W_UG5frPlY';
+
+  // Where they came from: ?src=facebook on the link, or the site that sent them
+  function source() {
+    const src = new URLSearchParams(location.search).get('src');
+    if (src) return src.toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 40) || null;
+    try {
+      const host = document.referrer ? new URL(document.referrer).hostname : '';
+      if (/facebook|fb\./.test(host)) return 'facebook';
+      if (/instagram/.test(host)) return 'instagram';
+      return host && host !== location.hostname ? host.replace(/^www\./, '').slice(0, 40) : 'direct';
+    } catch (e) { return 'direct'; }
+  }
+
+  const form = document.getElementById('form');
+  const msg = document.getElementById('msg');
+  const go = document.getElementById('go');
+  const page = document.getElementById('page');
+  const valid = e => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e) && e.length <= 254;
+
+  function joined(already) {
+    if (already) document.getElementById('doneTitle').textContent = "You're already on the list.";
+    page.classList.add('joined');
+  }
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const role = (form.querySelector('input[name=role]:checked') || {}).value;
+    const email = document.getElementById('email').value.trim().toLowerCase();
+    if (!role) { msg.textContent = 'Pick parent, student or other.'; return; }
+    if (!valid(email)) { msg.textContent = 'Check your email address.'; return; }
+    msg.textContent = '';
+    go.disabled = true; go.textContent = 'Joining…';
+    try {
+      const res = await fetch(URL_, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: KEY, Authorization: 'Bearer ' + KEY, Prefer: 'return=minimal' },
+        body: JSON.stringify({ email, role, source: source() })
+      });
+      if (res.ok) joined(false);
+      else if (res.status === 409) joined(true);   // that email already signed up
+      else msg.textContent = res.status === 400 ? 'Check your email address.' : 'Something went wrong. Try again in a minute.';
+    } catch (err) {
+      msg.textContent = "Couldn't connect. Check your internet and try again.";
+    }
+    go.disabled = false; go.textContent = 'Join the waitlist';
+  });
+</script>
+</body>
+</html>
